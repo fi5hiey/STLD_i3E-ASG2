@@ -1,4 +1,3 @@
-
 /*
  * Author: Lim Wee Han
  * Date: 26/06/2024
@@ -12,22 +11,42 @@ using UnityEngine.UI;
 using TMPro;
 using StarterAssets;
 
+/// <summary>
+/// This class handles the player's interactions with objects in the game world.
+/// </summary>
 public class Interactor : MonoBehaviour
 {
     /// <summary>
-    /// Interact Range
+    /// The range within which the player can interact with objects.
     /// </summary>
     public float range;
 
+    /// <summary>
+    /// The UI text element that displays interaction prompts.
+    /// </summary>
     public TextMeshProUGUI interacttext;
+
+    /// <summary>
+    /// The player's input handler.
+    /// </summary>
     public StarterAssetsInputs input;
+
+    /// <summary>
+    /// The GameManager instance to handle game state updates.
+    /// </summary>
     public GameManager gameManager;
 
+    /// <summary>
+    /// Initializes the Interactor by disabling the interaction text at the start.
+    /// </summary>
     private void Awake()
     {
         interacttext.enabled = false;
     }
 
+    /// <summary>
+    /// Checks for interactive objects in front of the player and handles interactions.
+    /// </summary>
     private void Update()
     {
         Ray ray = new Ray(transform.position, transform.forward);
@@ -48,4 +67,3 @@ public class Interactor : MonoBehaviour
         }
     }
 }
-

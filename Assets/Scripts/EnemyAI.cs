@@ -38,9 +38,12 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSight, playerInAttack;
 
+    /// <summary>
+    /// Called when the script instance is being loaded.
+    /// Initializes the main camera, animator, player reference, NavMeshAgent, health, and GameManager.
+    /// </summary>
     private void Awake()
     {
-
         cam = Camera.main;
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -50,29 +53,41 @@ public class EnemyAI : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
+    /// <summary>
+    /// Called every frame to check the player's position and update the enemy's state.
+    /// Also rotates the health bar to face the camera.
+    /// </summary>
     private void Update()
     {
         if (health >= 0)
         {
-            //Check if Player is in sight/attack range
+            // Check if Player is in sight/attack range
             playerInSight = Physics.CheckSphere(transform.position, sightRange, Player);
             playerInAttack = Physics.CheckSphere(transform.position, attackRange, Player);
 
-            //Change Enemy State 
+            // Change Enemy State
             if (!playerInSight && !playerInAttack) Patrol();
             if (playerInSight && !playerInAttack) Chase();
             if (playerInSight && playerInAttack) Attack();
         }
 
-        //Rotate Healthbar
+        // Rotate Healthbar
         healthBarCanvas.transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
     }
 
+    /// <summary>
+    /// Updates the health bar based on the enemy's current and maximum health.
+    /// </summary>
+    /// <param name="health">The current health of the enemy.</param>
+    /// <param name="maxHealth">The maximum health of the enemy.</param>
     public void UpdateHealthBar(float health, float maxHealth)
     {
         healthbar.fillAmount = health / maxHealth;
     }
 
+    /// <summary>
+    /// Handles the enemy's patrol behavior when the player is not in sight or attack range.
+    /// </summary>
     private void Patrol()
     {
         if (!walkPointSet)
@@ -92,6 +107,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Searches for a random walk point within the patrol range.
+    /// </summary>
     private void SearchWalkPoint()
     {
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
@@ -99,29 +117,43 @@ public class EnemyAI : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        //Check that random point is ON the map
+        // Check that random point is ON the map
         if (Physics.Raycast(walkPoint, -transform.up, 2f, Ground))
         {
             walkPointSet = true;
         }
     }
 
+    /// <summary>
+    /// Handles the enemy's chase behavior when the player is in sight but not in attack range.
+    /// </summary>
     private void Chase()
     {
         agent.SetDestination(player.position);
         transform.LookAt(player);
     }
 
+    /// <summary>
+    /// Handles the enemy's attack behavior when the player is in sight and within attack range.
+    /// </summary>
     private void Attack()
     {
         Chase();
     }
 
+    /// <summary>
+    /// Resets the attack state of the enemy after the attack delay.
+    /// </summary>
     private void ResetAtk()
     {
         attacked = false;
     }
 
+    /// <summary>
+    /// Reduces the enemy's health by the specified damage amount.
+    /// Updates the health bar and destroys the enemy if health drops to zero or below.
+    /// </summary>
+    /// <param name="damage">The amount of damage taken by the enemy.</param>
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -134,6 +166,11 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when a collider enters the trigger collider attached to this object.
+    /// Damages the player if the player is in the attack range and the enemy is not currently attacking.
+    /// </summary>
+    /// <param name="other">The Collider involved in this collision.</param>
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -148,6 +185,11 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when a collider stays within the trigger collider attached to this object.
+    /// Damages the player if the player is in the attack range and the enemy is not currently attacking.
+    /// </summary>
+    /// <param name="other">The Collider involved in this collision.</param>
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -162,6 +204,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys the enemy game object.
+    /// </summary>
     private void DestroyEnemy()
     {
         Destroy(gameObject);
