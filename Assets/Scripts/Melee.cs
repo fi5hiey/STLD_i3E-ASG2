@@ -25,6 +25,7 @@ public class Melee : MonoBehaviour
     public GameObject hitEffect;
     public AudioClip swordSwing;
     public AudioClip attackSound;
+    public AudioSource audioSource;
 
     bool attacking = false;
     bool readyToAttack = true;
@@ -60,8 +61,8 @@ public class Melee : MonoBehaviour
         Invoke(nameof(ResetAttack), attackSpeed);
         Invoke(nameof(AttackRaycast), attackDelay);
 
-        /*audioSource.pitch = Random.Range(0.9f, 1.1f);
-        AudioSource.playOneShot(swordSwing);*/
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(swordSwing);
     }
 
     public void ResetAttack()

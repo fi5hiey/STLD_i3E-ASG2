@@ -19,15 +19,12 @@ public class Interactor : MonoBehaviour
     /// </summary>
     public float range;
 
-    private TextMeshProUGUI interacttext;
-    private StarterAssetsInputs input;
-    private GameManager gameManager;
+    public TextMeshProUGUI interacttext;
+    public StarterAssetsInputs input;
+    public GameManager gameManager;
 
     private void Awake()
     {
-        interacttext = GameObject.Find("interacttext").GetComponent<TextMeshProUGUI>();
-        input = GameObject.Find("PlayerCapsule").GetComponent<StarterAssetsInputs>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         interacttext.enabled = false;
     }
 

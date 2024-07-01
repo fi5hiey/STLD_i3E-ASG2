@@ -16,15 +16,15 @@ public class Metal : Collectible
     public override void Interact(GameManager gameManager, TextMeshProUGUI interacttext, StarterAssetsInputs input)
     {
         base.Interact(gameManager, interacttext, input);
+        interacttext.enabled = true;
         interacttext.text = "Press [E] to Pickup " + gameObject.name;
 
         if (input.interact)
         {
             input.interact = false;
-            if (gameObject.CompareTag("Metal"))
-            {
+            
                 gameManager.metalsObtained += 1;
-            }
+          
             Destroy(gameObject);
 
         }
