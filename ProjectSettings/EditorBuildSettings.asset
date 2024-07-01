@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f51e9e586eaabd342b1cb43e5cc15335
+  - enabled: 1
     path: Assets/Scenes/spaceship.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/terrrain.unity
+    guid: 1bb0695d0c3deb441aef017a670b025f
+  - enabled: 1
+    path: Assets/Scenes/lava cave.unity
+    guid: c43d6be753609bc43afa80384881c70b
   m_configObjects: {}

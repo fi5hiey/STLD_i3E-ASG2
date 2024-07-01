@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 5827443612395961858}
   - component: {fileID: 150817044509408826}
   - component: {fileID: 2706695441536023927}
-  m_Layer: 8
+  - component: {fileID: 921239850458237348}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -126,10 +127,10 @@ MonoBehaviour:
   agent: {fileID: 2706695441536023927}
   Ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   Player:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   maxHealth: 10
   damage: 3
   healthbar: {fileID: 7101693635966992852}
@@ -162,6 +163,33 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &921239850458237348
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4403621107692577593}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5697185809962336167
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +201,7 @@ GameObject:
   - component: {fileID: 4213648293902279996}
   - component: {fileID: 3091505350396131072}
   - component: {fileID: 7101693635966992852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +276,7 @@ GameObject:
   - component: {fileID: 8436774616153305059}
   - component: {fileID: 5455062416195593438}
   - component: {fileID: 6208598986220065907}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +353,7 @@ GameObject:
   - component: {fileID: 72237921704225883}
   - component: {fileID: 5038791532507891923}
   - component: {fileID: 4919510185630133333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: enemyHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,10 +451,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3233985900547122025}
     m_Modifications:
+    - target: {fileID: 625626848151676489, guid: b053bdf62a594fb47b6f827917264e85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3040448029460724953, guid: b053bdf62a594fb47b6f827917264e85,
         type: 3}
       propertyPath: m_Name
       value: Axe (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040448029460724953, guid: b053bdf62a594fb47b6f827917264e85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435998745373242582, guid: b053bdf62a594fb47b6f827917264e85,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6990164166285316833, guid: b053bdf62a594fb47b6f827917264e85,
         type: 3}
@@ -506,10 +549,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2751348515636260400}
-    - targetCorrespondingSourceObject: {fileID: 3040448029460724953, guid: b053bdf62a594fb47b6f827917264e85,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7875786445634072097}
   m_SourcePrefab: {fileID: 100100000, guid: b053bdf62a594fb47b6f827917264e85, type: 3}
 --- !u!1 &3811721977461334704 stripped
 GameObject:
@@ -538,31 +577,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7875786445634072097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3811721977461334704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 276a600cb351fb5498916c8b21aff119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputs: {fileID: 0}
-  animator: {fileID: 2751348515636260400}
-  cam: {fileID: 0}
-  attackDistance: 3
-  attackDelay: 1.4
-  attackSpeed: 1
-  attackDamage: 5
-  attackLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  hitEffect: {fileID: 0}
-  swordSwing: {fileID: 0}
-  attackSound: {fileID: 0}
 --- !u!4 &9211601665393872008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6990164166285316833, guid: b053bdf62a594fb47b6f827917264e85,
